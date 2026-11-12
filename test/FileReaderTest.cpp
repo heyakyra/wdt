@@ -74,8 +74,9 @@ class RandomFile {
 bool canSupportODirect() {
 #ifdef WDT_SUPPORTS_ODIRECT
   return true;
-#endif
+#else
   return false;
+#endif
 }
 
 bool alignedBufferNeeded() {
