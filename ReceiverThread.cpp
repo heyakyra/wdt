@@ -428,9 +428,8 @@ ReceiverState ReceiverThread::processFileCmd() {
   sendHeartBeat();
 
   if (headerLen > numRead_) {
-    int64_t end = oldOffset_ + numRead_;
-    numRead_ =
-        readAtLeast(*socket_, buf_ + end, bufSize_ - end, headerLen, numRead_);
+    numRead_ = readAtLeast(*socket_, buf_ + oldOffset_, bufSize_ - oldOffset_,
+                           headerLen, numRead_);
   }
   if (numRead_ < headerLen) {
     WTLOG(ERROR) << "Unable to read full header " << headerLen << " "
