@@ -445,7 +445,7 @@ ReceiverState ReceiverThread::processFileCmd() {
   // transferred header length must match decoded header length
   if (headerLen != headerBytes) {
     WTLOG(ERROR) << "Decoded header length: " << headerBytes
-                 << ", transferred header length: " << headerBytes
+                 << ", transferred header length: " << headerLen
                  << ", they should be equal.";
     threadStats_.setLocalErrorCode(PROTOCOL_ERROR);
     return FINISH_WITH_ERROR;
