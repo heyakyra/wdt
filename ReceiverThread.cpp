@@ -447,6 +447,11 @@ ReceiverState ReceiverThread::processFileCmd() {
     WTLOG(ERROR) << "Decoded header length: " << headerBytes
                  << ", transferred header length: " << headerLen
                  << ", they should be equal.";
+    // Both lengths are within the numRead_ bytes received from oldOffset_.
+    const int64_t dumpLen = std::max<int64_t>(headerLen, headerBytes);
+    WTLOG(ERROR) << "Header bytes: "
+                 << folly::hexlify(
+                        folly::StringPiece(buf_ + oldOffset_, dumpLen));
     threadStats_.setLocalErrorCode(PROTOCOL_ERROR);
     return FINISH_WITH_ERROR;
   }
